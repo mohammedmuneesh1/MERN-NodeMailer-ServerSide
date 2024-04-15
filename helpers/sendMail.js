@@ -21,17 +21,3 @@ async function sendMail(userEmail,verificationUrl){
 }
 
 module.exports = sendMail;
-
-
-//       const mailInfo =  await mailer.sendMail({
-//         from: "mohammedmuneesh1@gmail.com",
-//         to: mailData.recipientMail,
-//         subject:mailData.subject,
-//         text:"hello this is the text section",
-//         ...(mailData.html ? { html: mailData.html } : {}), // Include html if present
-//         ...(mailData.attachments ? { attachments: mailData.attachments } : {}) // Include attachments if present
-    
-//       });
-//       // console.log(mailInfo)
-
-// }
