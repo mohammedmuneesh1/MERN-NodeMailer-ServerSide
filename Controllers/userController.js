@@ -3,6 +3,7 @@ const userCollection = require("../Models/user");
 const bcrypt = require("bcrypt");
 const tokenCollection = require("../Models/verifyToken")
 const crypto = require("crypto")
+const jwt = require("jsonwebtoken")
 const sendMail = require("../helpers/sendMail")
 
 
@@ -54,14 +55,20 @@ async function userLogin(req, res) {
     await sendMail(email, url);
     return res.status(201).json({ status: "Success", message: "Verification Mail has been sent to your account. Please verify your account" });
   }
-  return res.status(200).json({status:"Success",message:"user login successfully."})
+  const token = jwt.sign({userId:user._id}, process.env.USER_SECRET_KEY, { expiresIn: '7d' });
+
+  return res.status(200).json({status:"Success",message:"user login successfully.",token})
 }
 
+async function userHome (req,res){
+  return res.status(200).json({status:"Success",message:"welcome home."})
+}
 
 
 
 module.exports = {
   userRegistration,
   userVerify,
-  userLogin
+  userLogin,
+  userHome
 };
